@@ -1,6 +1,7 @@
 package tests;
 
 import java.util.AbstractMap;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,24 +36,28 @@ public class List2MapConversionsTest extends TestCase {
 		System.out.print("Map Original:\n\t");
 		System.out.println(ToString.generateString(mapOriginal));
 		
-		List<Map.Entry<Integer, String>> list = Map2ListConversions.convertToList(mapOriginal);
+		List<Map.Entry<Integer, String>> list 
+			= Map2ListConversions.convertToList(mapOriginal);
 		System.out.print("List Converted FROM Map Original:\n\t");
 		System.out.println(ToString.generateString(list));
 		
-		Map<Integer, String> mapReverted = List2MapConversions.convertToMap(list);
+		Map<Integer, String> mapReverted 
+			= List2MapConversions.convertToMap(list);
 		System.out.print("Map Reverted from List Converted:\n\t");
 		System.out.println(ToString.generateString(mapReverted));
 		
 		assertEquals("Conversion does not work", mapOriginal, mapReverted);
 		
 		
-		List<Map.Entry<Integer, String>> listSortedByKey = Map2ListConversions.convertToSortedList(mapOriginal, Map.Entry.comparingByKey());
+		List<Map.Entry<Integer, String>> listSortedByKey 
+			= Map2ListConversions.convertToSortedList(mapOriginal, Map.Entry.comparingByKey());
 		System.out.print("List Converted AND Sorted by Key FROM Map Original:\n\t");
 		System.out.println(ToString.generateString(listSortedByKey));
 		
-		List<Map.Entry<Integer, String>> listSortedByValue = Map2ListConversions.convertToSortedList(mapOriginal, Map.Entry.comparingByValue());
-		System.out.print("List Converted AND Sorted by Value FROM Map Original:\n\t");
-		System.out.println(ToString.generateString(listSortedByValue));
+		List<Map.Entry<Integer, String>> listSortedDescendingByValue 
+			= Map2ListConversions.convertToSortedList(mapOriginal, Collections.reverseOrder(Map.Entry.comparingByValue()));
+		System.out.print("List Converted AND Sorted by Value in Descending Order FROM Map Original:\n\t");
+		System.out.println(ToString.generateString(listSortedDescendingByValue));
 
 		
 		

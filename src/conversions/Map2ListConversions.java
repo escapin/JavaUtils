@@ -18,7 +18,8 @@ public class Map2ListConversions {
 
 	
 	// Generic function to convert Map<K,V> to a List of <Map.Entry<K,V> sorted by Key K
-	public static<K,V> List<Map.Entry<K,V>> convertToSortedList(Map<K,V> map, Comparator<Map.Entry<K,V>> comparator) {
+	public static<K,V> List<Map.Entry<K,V>> convertToSortedList(Map<K,V> map, 
+												Comparator<? super Map.Entry<K,V>> comparator) {
 		if(map==null)
 			return null;
 		
