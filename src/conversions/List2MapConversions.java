@@ -30,13 +30,13 @@ public class List2MapConversions {
 	}
 
 
-	// Generic function to convert a List of Map.Entry<K,V> with possible duplicate Keys to a LinkedHashMap<K,V> sorted by Keys 
-	public static<K extends Comparable<K>,V> Map<K,V> convertHandlingDuplicatesToSortedMap(List<Map.Entry<K,V>> list, Comparator<Map.Entry<K,V>> comparator) {
+	// Generic function to convert a List of Map.Entry<K,V> with possible duplicate Keys to a LinkedHashMap<K,V> sorted according the Comparator 
+	public static<K,V> Map<K,V> convertHandlingDuplicatesToSortedMap(List<Map.Entry<K,V>> list, Comparator<Map.Entry<K,V>> comparator) {
 		if(list==null)
 			return null;
 	  
 		return list.stream()
-				.sorted(comparator)			// sort the entries according to the comparator
+				.sorted(comparator)							// sort the entries according to the comparator
 				.collect(
 					Collectors.toMap(
 						x -> x.getKey(), x -> x.getValue(),
