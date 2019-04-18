@@ -1,4 +1,5 @@
-package utils;
+package conversions;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -15,18 +16,19 @@ public class Map2ListConversions {
 			.collect(Collectors.toList());
 	}
 
-	// Generic function to convert Map<K,V> to a List of <Map.Entry<K,V> sorted by K
-	public static<K extends Comparable<K>,V> List<Map.Entry<K,V>> convertToSortedList(Map<K,V> map) {
+	
+	// Generic function to convert Map<K,V> to a List of <Map.Entry<K,V> sorted by Key K
+	public static<K,V> List<Map.Entry<K,V>> convertToSortedList(Map<K,V> map, Comparator<Map.Entry<K,V>> comparator) {
 		if(map==null)
 			return null;
 		
 		return map.entrySet()
 			.stream()
-			.sorted(Map.Entry.comparingByKey())
+			.sorted(comparator)
 			.collect(Collectors.toList());
 	}
 
-
+	
 	// Generic function to convert Map<K,V> to a List<K>
 	public static<K,V> List<K> convertToListOfKeys(Map<K,V> map) {
 		if(map==null)
@@ -37,6 +39,7 @@ public class Map2ListConversions {
 			.collect(Collectors.toList());
 	}
 
+	
 	// Generic function to convert Map<K,V> to a List<K> sorted by K
 	public static<K extends Comparable<K>,V> List<K> convertToListOfSortedKeys(Map<K,V> map) {
 		if(map==null)
@@ -60,6 +63,7 @@ public class Map2ListConversions {
 			.collect(Collectors.toList());
 	}
 
+	
 	// Generic function to convert Map<K,V> to a List<V> sorted by V
 	public static<K,V extends Comparable<V>> List<V> convertToListOfSortedValues(Map<K,V> map) {
 		if(map==null)
