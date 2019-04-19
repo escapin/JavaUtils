@@ -26,7 +26,7 @@ public class List2Map {
 		return list.stream().collect(
 				Collectors.toMap(
 						x -> x.getKey(), x -> x.getValue(),
-						(oldKey, newKey) -> newKey));	// if a duplicate Key, take the latest one encountered
+						(oldKey, newKey) -> oldKey));	// if a duplicate Key, take the latest one encountered
 	}
 
 
@@ -42,7 +42,7 @@ public class List2Map {
 				.sorted(comparator)			// sort the entries according to the comparator
 				.collect(Collectors.toMap(
 						x -> x.getKey(), x -> x.getValue(),
-						(oldKey, newKey) -> newKey,		// if a duplicate Key, take the latest one encountered
+						(oldKey, newKey) -> oldKey,		// if a duplicate Key, take the latest one encountered
 						LinkedHashMap::new));			// returns a LinkedHashMap, keep order
 	}
 }
