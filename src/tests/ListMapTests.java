@@ -150,46 +150,86 @@ public class ListMapTests extends TestCase {
 	
 	@Test
 	public void test_list2map() {
-		List<Map.Entry<Integer,String>> list = new ArrayList<>();
+		List<Map.Entry<Integer,String>> listOriginal = new ArrayList<>();
 		
-		list.add(new AbstractMap.SimpleEntry<Integer,String>(10, "apple"));
-		list.add(new AbstractMap.SimpleEntry<Integer,String>(30, "banana"));
-		list.add(new AbstractMap.SimpleEntry<Integer,String>(50, "dragonfruit"));
-		list.add(new AbstractMap.SimpleEntry<Integer,String>(20, "orange"));
-		list.add(new AbstractMap.SimpleEntry<Integer,String>(40, "watermelon"));
+		listOriginal.add(new AbstractMap.SimpleEntry<Integer,String>(10, "apple"));
+		listOriginal.add(new AbstractMap.SimpleEntry<Integer,String>(30, "banana"));
+		listOriginal.add(new AbstractMap.SimpleEntry<Integer,String>(50, "dragonfruit"));
+		listOriginal.add(new AbstractMap.SimpleEntry<Integer,String>(20, "orange"));
+		listOriginal.add(new AbstractMap.SimpleEntry<Integer,String>(40, "watermelon"));
 		
 		
-		Map<Integer, String> map = List2Map.convertToMap(list);
+		Map<Integer, String> mapConverted = List2Map.convertToMap(listOriginal);
 		
-		List<Map.Entry<Integer,String>> listReverted = Map2List.convertToList(map);
-		List<Map.Entry<Integer,String>> listRevertedAndSortedDescending = Map2List.convertToSortedList(map, 
-				Map.Entry.comparingByKey(Comparator.reverseOrder()));
+		List<Map.Entry<Integer,String>> listReverted = Map2List.convertToList(mapConverted);
+		
+		List<Map.Entry<Integer,String>> listRevertedAndSorted 
+			= Map2List.convertToSortedList(mapConverted);
+		List<Map.Entry<Integer,String>> listRevertedAndSortedDescending 
+			= Map2List.convertToSortedList(mapConverted, 
+					Map.Entry.comparingByKey(Comparator.reverseOrder()));
 				
-		List<Integer> listOfKeys= Map2List.convertToListOfKeys(map);
-		List<Integer> listOfSortedKeys= Map2List.convertToListOfSortedKeys(map);
-		List<Integer> listOfSortedKeysDescending= 
-				Map2List.convertToListOfSortedKeys(map, Comparator.reverseOrder());
+		List<Integer> listOfKeys= Map2List.convertToListOfKeys(mapConverted);
+		List<Integer> listOfSortedKeys= Map2List.convertToListOfSortedKeys(mapConverted);
+		List<Integer> listOfSortedKeysDescending = 
+				Map2List.convertToListOfSortedKeys(mapConverted, Comparator.reverseOrder());
 		
-		List<String> listOfValues= Map2List.convertToListOfValues(map);
-		List<String> listOfSortedValues= Map2List.convertToListOfSortedValues(map);
-		List<String> listOfSortedValuesDescending= 
-				Map2List.convertToListOfSortedValues(map, Comparator.reverseOrder());
+		List<String> listOfValues= Map2List.convertToListOfValues(mapConverted);
+		List<String> listOfSortedValues= Map2List.convertToListOfSortedValues(mapConverted);
+		List<String> listOfSortedValuesDescending = 
+				Map2List.convertToListOfSortedValues(mapConverted, Comparator.reverseOrder());
 		
 		System.out.println("\n********************************************************************************");
 		System.out.println("\tTEST: List 2 Map\n");
 		
 		System.out.print("List Original:\n\t");
-		System.out.println(list);
+		System.out.println(listOriginal);
 		
-		System.out.print("Map Converted from List Original:\n\t");
-		System.out.println(map);
+		/****************************************************************/
+		System.out.print("\nMap Converted FROM List Original:\n\t");
+		/****************************************************************/
 		
-		System.out.print("List Reverted from Map Converted:\n\t");
+		System.out.println(mapConverted);
+		
+		/****************************************************************/
+		System.out.print("\nList Reverted FROM Map Converted:\n\t");
+		/****************************************************************/
+		
 		System.out.println(listReverted);
 		
-		assertTrue("Conversion does not work", list.containsAll(listReverted) && listReverted.containsAll(list));
+		System.out.print("- SORTED BY Key (Ascending Order):\n\t");
+		System.out.println(listRevertedAndSorted);
+		
+		System.out.print("- SORTED BY Key (Descending Order):\n\t");
+		System.out.println(listRevertedAndSortedDescending);
+		
+		assertTrue("Conversion does not work", listOfKeys.containsAll(listOfSortedKeys) 
+				&& listOfSortedKeys.containsAll(listOfKeys));
+		assertTrue("Conversion does not work", listOfKeys.containsAll(listOfSortedKeysDescending) 
+				&& listOfSortedKeysDescending.containsAll(listOfKeys));
+		assertTrue("Conversion does not work", listOfSortedKeys.containsAll(listOfSortedKeysDescending) 
+				&& listOfSortedKeysDescending.containsAll(listOfSortedKeys));
 		
 		
+		/****************************************************************/
+		System.out.print("\nList of Values FROM Map Converted:\n\t");
+		/****************************************************************/
+		
+		System.out.println(listOfValues);
+		
+		System.out.print("- SORTED in Ascending Order:\n\t");
+		System.out.println(listOfSortedValues);
+		
+		System.out.print("- SORTED in Descending Order:\n\t");
+		System.out.println(listOfSortedValuesDescending);
+		
+		
+		assertTrue("Conversion does not work", listOfValues.containsAll(listOfSortedValues) 
+				&& listOfSortedValues.containsAll(listOfValues));
+		assertTrue("Conversion does not work", listOfValues.containsAll(listOfSortedValues) 
+				&& listOfSortedValues.containsAll(listOfValues));
+		assertTrue("Conversion does not work", listOfSortedValues.containsAll(listOfSortedValuesDescending) 
+				&& listOfSortedValuesDescending.containsAll(listOfSortedValues));
 		
 		System.out.println("\n********************************************************************************");
 	}
