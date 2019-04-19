@@ -162,9 +162,18 @@ public class ListMapTests extends TestCase {
 		Map<Integer, String> map = List2Map.convertToMap(list);
 		
 		List<Map.Entry<Integer,String>> listReverted = Map2List.convertToList(map);
+		List<Map.Entry<Integer,String>> listRevertedAndSortedDescending = Map2List.convertToSortedList(map, 
+				Map.Entry.comparingByKey(Comparator.reverseOrder()));
+				
+		List<Integer> listOfKeys= Map2List.convertToListOfKeys(map);
+		List<Integer> listOfSortedKeys= Map2List.convertToListOfSortedKeys(map);
+		List<Integer> listOfSortedKeysDescending= 
+				Map2List.convertToListOfSortedKeys(map, Comparator.reverseOrder());
 		
-		
-		
+		List<String> listOfValues= Map2List.convertToListOfValues(map);
+		List<String> listOfSortedValues= Map2List.convertToListOfSortedValues(map);
+		List<String> listOfSortedValuesDescending= 
+				Map2List.convertToListOfSortedValues(map, Comparator.reverseOrder());
 		
 		System.out.println("\n********************************************************************************");
 		System.out.println("\tTEST: List 2 Map\n");
@@ -178,7 +187,7 @@ public class ListMapTests extends TestCase {
 		System.out.print("List Reverted from Map Converted:\n\t");
 		System.out.println(listReverted);
 		
-		//assertEquals("Conversion does not work", list, listReverted);
+		assertTrue("Conversion does not work", list.containsAll(listReverted) && listReverted.containsAll(list));
 		
 		
 		

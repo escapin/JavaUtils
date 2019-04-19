@@ -44,14 +44,27 @@ public class Map2List {
 	/************************ 
 	 * SORTING 
 	 ************************/
+	
 
 	// Generic function to convert Map<K,V> to a List of <Map.Entry<K,V> sorted according to the comparator
-	public static<K,V> List<Map.Entry<K,V>> convertToSortedList(Map<K,V> map,
+	public static<K extends Comparable<? super K>,V> List<Map.Entry<K,V>> convertToSortedList(Map<K, V> map) {
+		if(map==null)
+			return null;
+		
+		return map.entrySet()
+				.stream()
+				.sorted(Map.Entry.comparingByKey())		// // sort the entries according to the comparator
+				.collect(Collectors.toList());
+	}
+
+
+	// Generic function to convert Map<K,V> to a List of <Map.Entry<K,V> sorted according to the comparator
+	public static<K extends Comparable<? super K>,V> List<Map.Entry<K,V>> convertToSortedList(Map<K,V> map,
 			Comparator<? super Map.Entry<K,V>> comparator) {
 		if(map==null)
 			return null;
 		if(comparator==null)
-			return convertToList(map);
+			return convertToSortedList(map); 
 		
 		return map.entrySet()
 				.stream()
@@ -61,7 +74,7 @@ public class Map2List {
 
 	
 	// Generic function to convert Map<K,V> to a List<K> sorted in natural order on Key
-	public static<K extends Comparable<K>,V> List<K> convertToListOfSortedKeys(Map<K,V> map) {
+	public static<K extends Comparable<? super K>,V> List<K> convertToListOfSortedKeys(Map<K,V> map) {
 		if(map==null)
 			return null;
 		 	
@@ -74,7 +87,7 @@ public class Map2List {
 
 	
 	// Generic function to convert Map<K,V> to a List<K> sorted according to the Comparator on Key
-	public static<K extends Comparable<K>,V> List<K> convertToListOfSortedKeys(Map<K,V> map,
+	public static<K extends Comparable<? super K>,V> List<K> convertToListOfSortedKeys(Map<K,V> map,
 			Comparator<? super K> comparator) {
 		if(map==null)
 			return null;
@@ -90,7 +103,7 @@ public class Map2List {
 
 	
 	// Generic function to convert Map<K,V> to a List<V> sorted in natural order on Value
-	public static<K,V extends Comparable<V>> List<V> convertToListOfSortedValues(Map<K,V> map) {
+	public static<K,V extends Comparable<? super V>> List<V> convertToListOfSortedValues(Map<K,V> map) {
 		if(map==null)
 			return null;
 
@@ -103,7 +116,7 @@ public class Map2List {
 
 	
 	// Generic function to convert Map<K,V> to a List<V> sorted according to the Comparator on Value
-	public static<K,V extends Comparable<V>> List<V> convertToListOfSortedValues(Map<K,V> map,
+	public static<K,V extends Comparable<? super V>> List<V> convertToListOfSortedValues(Map<K,V> map,
 			Comparator<? super V> comparator) {
 		if(map==null)
 			return null;
