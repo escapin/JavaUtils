@@ -5,15 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import junit.framework.TestCase;
 import org.junit.jupiter.api.Test;
 
-import conversions.List2MapConversions;
-import conversions.Map2ListConversions;
-import junit.framework.TestCase;
+import conversions.List2Map;
+import conversions.Map2List;
 import utilities.ToString;
 
 
-public class Map2ListConversionsTest extends TestCase {
+public class Map2ListTest extends TestCase {
 	
 	
 	@Override
@@ -34,9 +34,12 @@ public class Map2ListConversionsTest extends TestCase {
 		list.add(new AbstractMap.SimpleEntry<Integer,String>(40, "watermelon"));
 		
 		
-		Map<Integer, String> map = List2MapConversions.convertToMap(list);
+		Map<Integer, String> map = List2Map.convertToMap(list);
 		
-		List<Map.Entry<Integer,String>> listReverted = Map2ListConversions.convertToList(map);
+		List<Map.Entry<Integer,String>> listReverted = Map2List.convertToList(map);
+		
+		//Map2List.con
+		
 		
 		System.out.println("\n********************************************************************************");
 		System.out.println("\tTEST: map2List: Simple Conversion\n");

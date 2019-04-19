@@ -7,10 +7,10 @@ public class ToString {
 
 	
 	public static<K,V> String generateString(List<Map.Entry<K, V>> list) {
-		StringBuffer  buffer= new StringBuffer("{");
-		list.forEach(item -> buffer.append(item + ", "));
-		buffer.delete(buffer.length()-2, buffer.length());
-		buffer.append("}");
+		StringBuffer  buffer= new StringBuffer("[");
+		list.forEach(item -> buffer.append(item + " -> "));
+		buffer.delete(buffer.length()-4, buffer.length());
+		buffer.append("]");
 		return buffer.toString();
 	}
 	
