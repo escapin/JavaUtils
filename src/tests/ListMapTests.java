@@ -140,13 +140,6 @@ public class ListMapTests extends TestCase {
 		System.out.println(mapDifferentSortedByValue);
 		System.out.println(" (as the sorting by value is done before the duplicates handling, \"10=apple\" is before \"10=pinapple\")");
 		
-//		// List<Map.Entry<Integer, String>> 
-//		Map<Integer, String > sortedByValue=list.stream().sorted(Map.Entry.comparingByValue(Comparator.naturalOrder()))
-//				.collect(Collectors.toMap(
-//				          Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
-//		//		.collect(Collectors.toList());
-//		System.out.println("\t" + sortedByValue); //FIXME: non funziona
-		
 		System.out.println("\n********************************************************************************");
 		
 		
